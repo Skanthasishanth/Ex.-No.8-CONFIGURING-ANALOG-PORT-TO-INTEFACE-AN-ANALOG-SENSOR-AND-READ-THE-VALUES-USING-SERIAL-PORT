@@ -1,17 +1,10 @@
-**** 
-
-
-### Ex. No. :8 CONFIGURING ANALOG PORT TO INTEFACE AN ANALOG SENSOR AND READ THE VALUES USING SERIAL PORT
-## Date: 
-###  
-
-## Aim: 
+# EXPERIMENT-8 CONFIGURING ANALOG PORT TO INTEFACE AN ANALOG SENSOR AND READ THE VALUES USING SERIAL PORT
+## Aim : 
 To configure ADC channel for interfacing an analog sensor and read the values on the com port 
-## Components required:
+## Components required :
 STM 32 CUBE IDE , STM32 NUCLEO BOARD, CONNECTING CABLE, SERIAL PORT UTILITY , ANALOG SENSOR - 3.3V TYPE 
- ## Theory 
+## Theory :
 
- 
 ADCs are characterized by:
 
 Resolution [bit]: the number of bits to represent a digital signal.
@@ -84,9 +77,7 @@ This results in a voltage divider where the resistance of the upper arm R1 does 
 
 But since the signal frequency will remain unchanged, we will plot the dependence of capacitance on capacitance ( C = 1-100 pF):
   
-
-  
- ## Procedure:
+## Procedure :
 
 Open STM32CubeIDE Software and go to File → New… → STM32 Project.
 Click on Board Selector and select NUCLEO-G431RB in the dropdown menu.
@@ -148,19 +139,65 @@ D0 pin is a digital output
 GND pin is a Ground
 This module also includes a potentiometer that will fix the threshold value, & the value can be evaluated by the comparator-LM393. The LED will turn on/off based on the threshold value.
 
+## Program :
+```
+Developed by : S Kantha Sishanth
+Register No. : 212222100020
+```
+```c
+#include "main.h"
+#include"stdio.h"
+uint32_t adcvalue;
+#if defined (_ICCARM) || defined (_ARMCC_VERSION)
+#define PUTCHAR_PROTOTYPE int fputc(int ch, FILE *f)
+#elif defined(_GNUC_)
+   
+#define PUTCHAR_PROTOTYPE int __io_putchar(int ch)
+#endif  
 
-##  Program 
+while(1)
+{
+
+	HAL_ADC_Start(&hadc1);
+			HAL_ADC_PollForConversion(&hadc1,100);
+			adcvalue = HAL_ADC_GetValue(&hadc1);
+			HAL_ADC_Stop(&hadc1);
+			HAL_Delay(500);
+			printf("ADC VALUE:%ld\n",adcvalue);
+
+}
+
+PUTCHAR_PROTOTYPE
+{
+
+  HAL_UART_Transmit(&huart1, (uint8_t *)&ch, 1, 0xFFFF);
+
+  return ch;
+}
+``` 
+## Output :
+### Board Settings and its connections :
+
+![exp 8a](https://github.com/Skanthasishanth/Ex.-No.8-CONFIGURING-ANALOG-PORT-TO-INTEFACE-AN-ANALOG-SENSOR-AND-READ-THE-VALUES-USING-SERIAL-PORT/assets/118298456/569bc681-3cec-4c03-8dc4-bc304c712ff4)
 
 
- 
+![exp 8b](https://github.com/Skanthasishanth/Ex.-No.8-CONFIGURING-ANALOG-PORT-TO-INTEFACE-AN-ANALOG-SENSOR-AND-READ-THE-VALUES-USING-SERIAL-PORT/assets/118298456/4a1fcb51-d9a7-4bcb-823b-02565f571341)
+
+
+![exp 8c](https://github.com/Skanthasishanth/Ex.-No.8-CONFIGURING-ANALOG-PORT-TO-INTEFACE-AN-ANALOG-SENSOR-AND-READ-THE-VALUES-USING-SERIAL-PORT/assets/118298456/49085fb2-1032-4789-a94e-8b452ceca1f1)
+
+
+### Normal ADC Value :
+
+![exp 8d](https://github.com/Skanthasishanth/Ex.-No.8-CONFIGURING-ANALOG-PORT-TO-INTEFACE-AN-ANALOG-SENSOR-AND-READ-THE-VALUES-USING-SERIAL-PORT/assets/118298456/3b31b250-5072-43f6-a9e2-84e18f7e678f)
+
+
+### After Light Dipping of soil-moisture-sensor-device in water :
+
+![exp 8e](https://github.com/Skanthasishanth/Ex.-No.8-CONFIGURING-ANALOG-PORT-TO-INTEFACE-AN-ANALOG-SENSOR-AND-READ-THE-VALUES-USING-SERIAL-PORT/assets/118298456/076e4656-377e-422e-9e2f-a72374e20e19)
+
+![exp 8f](https://github.com/Skanthasishanth/Ex.-No.8-CONFIGURING-ANALOG-PORT-TO-INTEFACE-AN-ANALOG-SENSOR-AND-READ-THE-VALUES-USING-SERIAL-PORT/assets/118298456/4cd4ab93-c9d3-4453-8b52-d433e4397c87)
 
 ## Result :
- 
-## Output  :
+Hence,the configuring analog port to inteface an analog sensor and read the values using serial port runned successfully.
 
-
-
-
-
-
-****
